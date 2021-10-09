@@ -1,0 +1,52 @@
+/* ----------------------------- articleTag FILE ---------------------------- */
+
+.tag {
+    display: inline-block;
+    font-family: Saira Condensed;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 2px 10px;
+    border: 1px solid #FECC50;
+    border-radius: 5px;
+    color: #FECC50;
+    user-select: none;
+    .tag-text{
+        white-space: nowrap
+    }
+    svg {
+        display: none;
+    }
+}
+
+.active {
+    background-color: #85713F;
+    border-color: #85713F;
+    svg {
+        display: inline-block;
+        margin-left: 5px;
+    }
+}
+
+.clickable {
+    cursor: pointer;
+    font-size: 18px;
+    margin: 15px 7px 0px;
+}
+
+.unclickable {
+    background-color: #85713F;
+    border-color: #85713F;
+    font-size: 18px;
+    margin: 14px 0px;
+}
+
+.vertical {
+    transform-origin: top right;
+    position: absolute;
+    transform: rotate(-90deg);
+    @media screen and(max-width: 950px) {
+        position: initial;
+        transform: rotate(0deg);
+        margin-left: 20px;
+    }
+}

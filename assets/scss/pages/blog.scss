@@ -1,0 +1,166 @@
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+////////////////// BLOG FILE  ///////////////
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+.blog {
+    background: #fecc50;
+    overflow-x: hidden;
+    .blog-text-bestOfContainer {
+        position: relative;
+        .leftText {
+            .title {
+                font-family: Saira Condensed;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 8em;
+                color: #fbaf07;
+                position: absolute;
+                z-index: 60;
+                left: 5%;
+                bottom: 50px;
+                @media screen and(max-width: 600px) {
+                    font-size: 6em;
+                    left: 10%;
+                    bottom: 20px;
+                }
+            }
+            p {
+                position: absolute;
+                left: 5%;
+                font-family: Saira;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 22px;
+                color: #ffffff;
+                z-index: 60;
+                bottom: 20px;
+                @media screen and(max-width: 600px) {
+                    display: none;
+                }
+            }
+        }
+        .bestOfContainer {
+            position: absolute;
+            display: flex;
+            justify-content: flex-end;
+            bottom: -100px;
+            right: 8%;
+            z-index: 60;
+            @media screen and(max-width: 1150px) {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                right: 0%;
+                top: 15%;
+                margin-top: 30px;
+            }
+        }
+    }
+    .allArticles {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #333;
+        padding: 189px 17% 75px;
+        @media screen and(max-width: 1300px) {
+            padding: 189px 150px 75px;
+        }
+        @media screen and(max-width: 1150px) {
+            padding: 400px 75px 75px;
+        }
+        @media screen and(max-width: 630px) {
+            padding: 400px 20px 75px;
+        }
+        @media screen and(max-width: 550px) {
+            padding: 650px 20px 75px;
+        }
+        .title {
+            font-family: Saira;
+            color: white;
+            font-size: 34px;
+            letter-spacing: 0.06em;
+            font-weight: 600;
+            @media screen and(max-width: 550px) {
+                font-size: 26px;
+            }
+        }
+        .themes {
+            display: flex;
+            margin: 80px 0 25px;
+            border-bottom: 2px solid #4f4f4f;
+            padding-bottom: 16px;
+            width: 96%;
+            justify-content: space-between;
+            align-items: flex-end;
+            @media screen and(max-width: 950px) {
+                flex-direction: column;
+                align-items: center;
+            }
+            @media screen and(max-width: 630px) {
+                margin: 25px 0 25px;
+            }
+            .text {
+                font-family: Saira;
+                font-weight: 600;
+                font-size: 20px;
+                letter-spacing: 0.06em;
+                color: white;
+                @media screen and(max-width: 950px) {
+                    margin-bottom: 40px;
+                }
+                @media screen and(max-width: 630px) {
+                    display: none;
+                }
+            }
+            .tags {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                max-width: 80%;
+                @media screen and(max-width: 950px) {
+                    justify-content: center;
+                }
+            }
+        }
+        .container-tags-cards {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+            position: relative;
+            @media screen and(max-width: 950px) {
+                flex-direction: column;
+            }
+            .container-cards {
+                display: flex;
+                width: 100%;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                margin-bottom: 40px;
+                @media screen and(max-width: 1300px) {
+                    justify-content: center;
+                }
+            }
+
+            .container-tags {
+                display: flex;
+                justify-content: flex-end;
+                position: absolute;
+                left: -350px;
+                top: 5px;
+                width: 300px;
+                @media screen and(max-width: 1300px) {
+                    left: -300px;
+                }
+                @media screen and(max-width: 950px) {
+                    // display: none;
+                    justify-content: flex-start;
+                    left: 0px;
+                    position: initial;
+                }
+            }
+        }
+    }
+}

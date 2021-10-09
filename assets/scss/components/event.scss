@@ -1,0 +1,35 @@
+.event{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  margin-bottom: 22px;
+  @media screen and(max-width: 500px) {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    margin-bottom: 55px;
+  }
+  .thumbnail{
+    width: 227px;
+    height: 143px;
+  }
+  .text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and(max-width: 500px) {
+      margin-top: 10px;
+    }
+    .name{
+      font-family: "Saira Condensed", sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .date{
+      font-family: Saira;
+      font-size: 1.37rem;
+      font-weight: 400;
+    }
+  }
+}

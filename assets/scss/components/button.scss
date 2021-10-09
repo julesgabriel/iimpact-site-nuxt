@@ -1,0 +1,45 @@
+.button{
+  border-radius: 10px;
+  width: fit-content;
+
+  .text{
+    display: inline-block;
+    padding: 12px 26px;
+    font-family: "Saira Condensed", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.06rem;
+  }
+}
+
+.yellow{
+  border: 2px solid $yellow;
+  .text{
+    color: #FBAF07;
+  }
+}
+
+.yellow:hover{
+  background-color: #FBAF07;
+  border-color: #fbaf07;
+  .text{
+    color: white;
+  }
+}
+
+.black{
+  border: 2px solid black;
+  margin-top: 20px;
+  .text{
+    color: black;
+  }
+}
+
+.black:hover{
+  background-color: black;
+  .text{
+    color: white;
+  }
+}
+
