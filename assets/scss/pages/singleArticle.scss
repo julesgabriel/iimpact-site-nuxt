@@ -129,6 +129,10 @@ body {
           @media screen and(max-width: 750px) {
             width: 100%;
           }
+          img {
+            margin: 1rem 0;
+            width: 100%;
+          }
         }
 
         .authors {
@@ -138,38 +142,6 @@ body {
           font-size: 12px;
           margin-top: 50px;
           letter-spacing: 0.06em;
-        }
-
-        /* --------------------------- Annexes facultatifs -------------------------- */
-        .annexes {
-          margin-top: 32px;
-
-          p {
-            font-family: "Saira", sans-serif;
-            font-weight: 600;
-            font-size: 34px;
-            letter-spacing: 0.06em;
-            margin-bottom: 20px;
-          }
-
-          .images {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-
-            img {
-              margin: 25px 0;
-              width: 90%;
-              @media screen and(max-width: 850px) {
-                margin: 5.5px 0;
-              }
-              @media screen and(max-width: 500px) {
-                max-width: 330px;
-              }
-
-            }
-
-          }
         }
       }
     }
