@@ -34,19 +34,12 @@
         <div class="tags">
           <div id="devData">{{ this.article.category.name }}</div>
         </div>
-        <p class="text" v-html="$md.render(article.content)"/>
+        <p class="text" v-html="renderMarkdown($md.render(article.content))"/>
         <div class="authors">
           Article publié le
           {{ renderDateToMonthAndDateLitterals(article.date) }}<br/>{{
             renderAuthorsSentence(this.article.authors)
           }}
-        </div>
-        <div v-if="article.annexes.length > 0" class="annexes">
-          <p>Annexes</p>
-          <div class="images">
-            <img v-for="annexe in article.annexes" :key="annexe.id" :src="envApiUrl + annexe.formats.medium.url"
-                 alt=""/>
-          </div>
         </div>
       </div>
     </div>
@@ -92,6 +85,10 @@ export default {
     },
     animateArticleOnScroll() {
       return this.scroll = window.scrollY;
+    },
+    renderMarkdown(rendered) {
+      let regex = /upload/g
+      return rendered.replace(regex, process.env.baseUrl + "/upload").replace(/\/http/g, "http")
     },
   },
   mounted() {

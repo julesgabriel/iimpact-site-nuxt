@@ -54,7 +54,7 @@ export default {
     preset: 'default',
     linkify: true,
     breaks: true,
-    runtime: true // Support `$md()`
+    injected: true,
   },
   axios: {
     // proxy: true

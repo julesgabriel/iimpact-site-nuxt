@@ -144,7 +144,6 @@ export default {
     },
     fetchArticles() {
       GetDataFetchedFromApi("articles").then((res) => {
-        console.log(res)
         res.data.forEach((el) => {
           this.articles.push(el);
         });
