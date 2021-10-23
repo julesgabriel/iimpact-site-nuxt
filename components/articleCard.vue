@@ -42,7 +42,7 @@
       <div class="authors">
         <img
             v-for="(item, index) in author"
-            :src="envApiUrl + item.avatar.formats.thumbnail.url"
+            :src="envApiUrl + item.avatar.url"
             alt="ok"
             :key="index"
         />
