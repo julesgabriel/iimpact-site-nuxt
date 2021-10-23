@@ -121,13 +121,17 @@
 <script>
 import ArticleCard from "@/components/articleCard.vue";
 import ArticleTag from "@/components/articleTag.vue";
-import GetDataFetchedFromApi from "../logic/httpClient/getDataFetchFromApi";
 
 export default {
   name: "Blog",
   async fetch() {
-    await this.fetchCategories();
-    await this.fetchArticles();
+    this.filters = await fetch(`${process.env.baseUrl}/categories`).then(res => res.json());
+    this.filters.forEach((el, index) => {
+      el.isActive = false;
+      el.id = index;
+    })
+    this.articles = await fetch(`${process.env.baseUrl}/articles`).then(res => res.json());
+    this.initialArticles = await fetch(`${process.env.baseUrl}/articles`).then(res => res.json());
   },
   components: {
     BackgroundBlog: () => import('@/components/backgroundBlog.vue'),
@@ -160,24 +164,6 @@ export default {
     };
   },
   methods: {
-    fetchCategories() {
-      GetDataFetchedFromApi("categories")
-        .then(response => response.forEach((el, index) => {
-          el.isActive = false;
-          el.id = index;
-          this.filters.push(el);
-        }))
-        .catch(err => err)
-      ;
-    },
-    fetchArticles() {
-      GetDataFetchedFromApi("articles").then((response) => {
-        response.forEach((el) => {
-          this.articles.push(el);
-          this.initialArticles.push(el)
-        });
-      });
-    },
     changeClassAndHandleActiveFilters(id) {
       this.filters[id].isActive = !this.filters[id].isActive;
       let indexOfFilterClicked = this.filtersActive.indexOf(this.filters[id].name);
@@ -200,9 +186,6 @@ export default {
       this.filtersActive.forEach(el => array = [...array, ...this.initialArticles.filter(element => element.category.name === el)])
       this.articles = array;
     },
-    filters: function () {
-      console.log(this.filters)
-    }
   }
 };
 </script>

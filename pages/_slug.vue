@@ -51,11 +51,9 @@ import GetDataFetchedFromApi from "../logic/httpClient/getDataFetchFromApi";
 
 export default {
   async fetch() {
-    await GetDataFetchedFromApi('articles', this.$route.params.slug).then(
-      (response) => {
-        this.title = response.title
-        this.article = response
-      })
+    this.article = await fetch(`${process.env.baseUrl}/articles/${this.$route.params.slug}`)
+    .then(res => res.json());
+    this.title = this.article.title;
   },
   name: "singleArticle",
   components: {},

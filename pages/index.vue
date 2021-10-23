@@ -89,11 +89,8 @@ import GetDataFetchedFromApi from "../logic/httpClient/getDataFetchFromApi";
 
 export default {
   async fetch() {
-    this.fetchMissions();
-    this.presentations = await fetch(
-      `${process.env.baseUrl}/${"home"}`
-    ).then(res => res.json())
-    this.fetchPresentation();
+    this.presentations = await fetch(`${process.env.baseUrl}/home`).then(res => res.json());
+    this.missions = await fetch(`${process.env.baseUrl}/missions`).then(res => res.json());
   },
   name: 'Home',
   components: {
@@ -146,27 +143,6 @@ export default {
         }
       ]
     }
-  },
-  watch: {
-    presentations: function () {
-      console.log(this.presentations)
-    },
-  },
-  methods: {
-    GetDataFetchedFromApi,
-    fetchMissions() {
-      GetDataFetchedFromApi("missions").then((response) => {
-        response.forEach((el) => {
-          this.missions.push(el);
-        });
-      });
-    },
-    fetchPresentation() {
-      GetDataFetchedFromApi("home").then((response) => {
-        console.log(response)
-        this.presentations = response;
-      });
-    },
   },
 }
 </script>
