@@ -161,17 +161,16 @@ export default {
   },
   methods: {
     fetchCategories() {
-      GetDataFetchedFromApi("categories").then((res) =>
-        res.data.forEach((el, index) => {
+      GetDataFetchedFromApi("categories")
+        .then(response => response.forEach((el, index) => {
           el.isActive = false;
           el.id = index;
           this.filters.push(el);
-        })
-      );
+        }));
     },
     fetchArticles() {
-      GetDataFetchedFromApi("articles").then((res) => {
-        res.data.forEach((el) => {
+      GetDataFetchedFromApi("articles").then((response) => {
+        response.forEach((el) => {
           this.articles.push(el);
           this.initialArticles.push(el)
         });

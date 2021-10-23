@@ -54,9 +54,6 @@ export default {
     breaks: true,
     injected: true,
   },
-  axios: {
-    // proxy: true
-  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
 }

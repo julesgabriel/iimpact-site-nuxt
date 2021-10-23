@@ -147,15 +147,15 @@ export default {
   methods: {
     GetDataFetchedFromApi,
     fetchMissions() {
-      GetDataFetchedFromApi("missions").then((res) => {
-        res.data.forEach((el) => {
+      GetDataFetchedFromApi("missions").then((response) => {
+        response.forEach((el) => {
           this.missions.push(el);
         });
       });
     },
     fetchPresentation() {
-      GetDataFetchedFromApi("presentations").then((res) => {
-        res.data.forEach((el) => {
+      GetDataFetchedFromApi("presentations").then((response) => {
+        response.forEach((el) => {
           this.presentations.push(el);
         });
       });
