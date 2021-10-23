@@ -10,6 +10,18 @@ export default {
   components: {
     ComingSoon,
   },
+  head() {
+    return {
+      title: "IIMPACT - Membres",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Membres description",
+        }
+      ]
+    }
+  },
 };
 </script>
 
