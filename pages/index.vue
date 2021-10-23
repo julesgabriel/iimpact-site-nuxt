@@ -18,20 +18,21 @@
         <Missions
           v-for="mission in missions"
           :key="'mission-' + mission.id"
-          :name="mission.name"
+          :alt="mission.alt"
+          :title="mission.title"
           :image="envApiUrl + mission.icon.url"
         />
       </div>
-      <div class="presentation" v-for="presentation in presentations" :key="'presentation-' + presentation.id">
+      <div class="presentation" :key="'presentation-' + presentations.id">
         <div class="top">
-          <img :src="envApiUrl + presentation.video.formats.large.url" class="video">
           <div class="videoText">
-            <div class="title">{{ presentation.title }}</div>
-            <div class="text">{{ presentation.first_description }}
+            <img :src="envApiUrl + presentations.media.url" class="video" v-if="presentations.id !== undefined">
+            <div class="title">{{ presentations.titlePresentation }}</div>
+            <div class="text">{{ presentations.firstContentPresentation }}
             </div>
           </div>
         </div>
-        <p class="bottomText">{{ presentation.second_description }}</p>
+        <p class="bottomText">{{ presentations.secondContentPresentation }}</p>
       </div>
       <div class="pres-button">
         <Button
@@ -144,6 +145,11 @@ export default {
       ]
     }
   },
+  watch: {
+    presentations: function () {
+      console.log(this.presentations)
+    },
+  },
   methods: {
     GetDataFetchedFromApi,
     fetchMissions() {
@@ -154,10 +160,9 @@ export default {
       });
     },
     fetchPresentation() {
-      GetDataFetchedFromApi("presentations").then((response) => {
-        response.forEach((el) => {
-          this.presentations.push(el);
-        });
+      GetDataFetchedFromApi("home").then((response) => {
+        console.log(response)
+        this.presentations = response;
       });
     },
   },

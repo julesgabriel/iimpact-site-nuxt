@@ -1,7 +1,7 @@
 <template>
   <div class="mission">
     <img :src="image" :alt="alt" class="logo">
-    <p class="missionName">{{name}}</p>
+    <p class="missionName">{{title}}</p>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   props:{
     image: String,
     alt: String,
-    name: String
+    title: String
   }
 }
 </script>

@@ -166,7 +166,9 @@ export default {
           el.isActive = false;
           el.id = index;
           this.filters.push(el);
-        }));
+        }))
+        .catch(err => err)
+      ;
     },
     fetchArticles() {
       GetDataFetchedFromApi("articles").then((response) => {
