@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import GetDataFetchedFromApi from "../logic/httpClient/getDataFetchFromApi";
 
 export default {
   async fetch() {

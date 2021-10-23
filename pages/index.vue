@@ -84,8 +84,6 @@ import BackgroundHomeBottom from "@/components/backgroundHomeBottom.vue";
 import Missions from "@/components/missions.vue";
 import Event from "@/components/event.vue";
 import Button from "@/components/Button.vue";
-import GetDataFetchedFromApi from "../logic/httpClient/getDataFetchFromApi";
-
 
 export default {
   async fetch() {
