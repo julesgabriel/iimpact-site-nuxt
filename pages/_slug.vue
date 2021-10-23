@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import GetDataFetchedFromApi from "../../logic/httpClient/getDataFetchFromApi";
+import GetDataFetchedFromApi from "../logic/httpClient/getDataFetchFromApi";
 
 export default {
   async fetch() {
@@ -61,10 +61,23 @@ export default {
   components: {},
   data() {
     return {
+      title: "",
       envApiUrl: process.env.baseUrl,
       article: false,
       scroll: 0
     };
+  },
+  head() {
+    return {
+      title: `IIMPACT - ${this.article.shortTitle}`,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.article.meta_description,
+        }
+      ]
+    }
   },
   methods: {
     renderAuthorsSentence(authors) {

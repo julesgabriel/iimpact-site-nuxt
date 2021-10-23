@@ -31,9 +31,7 @@
             </div>
           </div>
         </div>
-
         <p class="bottomText">{{ presentation.second_description }}</p>
-
       </div>
       <div class="pres-button">
         <Button
@@ -133,7 +131,18 @@ export default {
       missions: [],
       presentations: []
     }
-
+  },
+  head() {
+    return {
+      title: "IIMPACT - Accueil",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Accueil description",
+        }
+      ]
+    }
   },
   methods: {
     GetDataFetchedFromApi,

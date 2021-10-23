@@ -15,9 +15,8 @@
       <div
         class="bestOfContainer"
         v-for="(article, index) in articles.filter((item) => item.bestOf)"
-        :key="index"
-      >
-        <NuxtLink :to="'article/'+article.slug">
+        :key="index">
+        <NuxtLink :to="article.slug">
           <ArticleCard
             :mainPhoto="article.mainPhoto"
             :title="article.title"
@@ -28,7 +27,7 @@
             :bestOf="article.bestOf"
             v-bind:class="{
             bestOf,
-          }"
+            }"
           />
         </NuxtLink>
       </div>
@@ -45,33 +44,31 @@
               active: filter.isActive,
               clickable: clickableFilters,
             }"
-            v-on:click.native="changeClass(filter.id)"
+            v-on:click.native="changeClassAndHandleActiveFilters(filter.id)"
             :tagname="filter.name"
             :clickable="clickableFilters"
           />
         </div>
       </div>
-      <div
-        v-for="filter in filters"
-        :key="'filter-' + filter.id"
-        class="container-tags-cards">
-        <div class="container-tags">
-          <ArticleTag
-            v-if="getActiveFilter(filter.name)"
-            :tagname="filter.name"
-            :vertical="vertical"
-            v-bind:class="{
-              vertical,
+      <template v-if="filtersActive.length > 0">
+        <div
+          v-for="filter in filtersActive"
+          :key="'filter-' + filter.id"
+          class="container-tags-cards">
+          <div class="container-tags">
+            <ArticleTag
+              :tagname="filter"
+              :vertical="vertical"
+              v-bind:class="{
+                vertical,
               unclickable,
-            }"
-          />
-        </div>
-        <div v-if="getActiveFilter(filter.name)" class="container-cards">
-          <div v-for="article in articles" :key="'article-' + article.id">
+              }"
+            />
+          </div>
+          <template v-for="article in articles">
             <div v-if="!article.bestOf">
-              <NuxtLink :to="'article/'+article.slug">
+              <NuxtLink v-if="article.category.name === filter" :to="article.slug">
                 <ArticleCard
-                  v-if="filter.name === article.category.name"
                   :mainPhoto="article.mainPhoto"
                   :title="article.title"
                   :date="article.date"
@@ -82,9 +79,41 @@
                 />
               </NuxtLink>
             </div>
-          </div>
+          </template>
         </div>
-      </div>
+      </template>
+      <template v-else>
+        <div
+          v-for="filter in filters"
+          :key="'filter-' + filter.id"
+          class="container-tags-cards">
+          <div class="container-tags" v-if="filter.articles.length > 0">
+            <ArticleTag
+              :tagname="filter.name"
+              :vertical="vertical"
+              v-bind:class="{
+                vertical,
+                unclickable,
+              }"
+            />
+          </div>
+          <template v-for="article in articles">
+            <div v-if="!article.bestOf">
+              <NuxtLink v-if="article.category.name === filter.name" :to="article.slug">
+                <ArticleCard
+                  :mainPhoto="article.mainPhoto"
+                  :title="article.title"
+                  :date="article.date"
+                  :description="article.preview"
+                  :author="article.authors"
+                  :tagname="article.category.name"
+                  :bestOf="article.bestOf"
+                />
+              </NuxtLink>
+            </div>
+          </template>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -105,11 +134,25 @@ export default {
     ArticleCard,
     ArticleTag,
   },
+  head() {
+    return {
+      title: "IIMPACT - Blog",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Blog description",
+        }
+      ]
+    }
+  },
   data() {
     return {
       vertical: true,
       articles: [],
+      initialArticles: [],
       filters: [],
+      filtersActive: [],
       clickableFilters: true,
       unclickable: true,
       bestOf: true,
@@ -117,22 +160,6 @@ export default {
     };
   },
   methods: {
-    // Get only the articles if the filter is active or if as article
-    getActiveFilter(filterName) {
-      if (this.filters.find((filter) => filter.isActive)) {
-        let currentFilter = this.filters.find(
-          (filter) => filter.name === filterName
-        );
-        if (currentFilter.isActive)
-          return !!this.articles.find(
-            (article) => article.category.name === filterName
-          );
-        else return false;
-      } else
-        return !!this.articles.find(
-          (article) => article.category.name === filterName
-        );
-    },
     fetchCategories() {
       GetDataFetchedFromApi("categories").then((res) =>
         res.data.forEach((el, index) => {
@@ -146,11 +173,14 @@ export default {
       GetDataFetchedFromApi("articles").then((res) => {
         res.data.forEach((el) => {
           this.articles.push(el);
+          this.initialArticles.push(el)
         });
       });
     },
-    changeClass(id) {
+    changeClassAndHandleActiveFilters(id) {
       this.filters[id].isActive = !this.filters[id].isActive;
+      let indexOfFilterClicked = this.filtersActive.indexOf(this.filters[id].name);
+      indexOfFilterClicked === -1 ? this.filtersActive.push(this.filters[id].name) : this.filtersActive.splice(indexOfFilterClicked, 1);
     },
     bestOfResponsive() {
       window.innerWidth < 550 ? (this.bestOf = false) : (this.bestOf = true);
@@ -162,6 +192,17 @@ export default {
       this.bestOfResponsive();
     });
   },
+  watch: {
+    filtersActive: function () {
+      if (this.filtersActive.length === 0) return this.articles = this.initialArticles;
+      let array = [];
+      this.filtersActive.forEach(el => array = [...array, ...this.initialArticles.filter(element => element.category.name === el)])
+      this.articles = array;
+    },
+    filters: function () {
+      console.log(this.filters)
+    }
+  }
 };
 </script>
 
