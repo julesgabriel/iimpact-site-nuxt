@@ -55,7 +55,6 @@
                 9 au 13 septembre se tenait la Welcome Week, la semaine d’intégration...</p>
             </div>
           </div>
-
         </div>
         <div class="events">
           <p class="title">Nos derniers évènements</p>
@@ -91,6 +90,9 @@ import GetDataFetchedFromApi from "../logic/httpClient/getDataFetchFromApi";
 export default {
   async fetch() {
     this.fetchMissions();
+    this.presentations = await fetch(
+      `${process.env.baseUrl}/${"home"}`
+    ).then(res => res.json())
     this.fetchPresentation();
   },
   name: 'Home',
