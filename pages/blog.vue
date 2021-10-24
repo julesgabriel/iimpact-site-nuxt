@@ -130,8 +130,9 @@ export default {
       el.isActive = false;
       el.id = index;
     })
-    this.articles = await fetch(`${process.env.baseUrl}/articles`).then(res => res.json());
-    this.initialArticles = await fetch(`${process.env.baseUrl}/articles`).then(res => res.json());
+    const fetchedArticles = await fetch(`${process.env.baseUrl}/articles`).then(res => res.json());
+    this.articles = fetchedArticles;
+    this.initialArticles = fetchedArticles;
   },
   components: {
     BackgroundBlog: () => import('@/components/backgroundBlog.vue'),
